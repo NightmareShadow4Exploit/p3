@@ -1,5 +1,15 @@
 {
   "dropdowns": [
-    "Bibi Zainab"
+    "Bibi Zainab",
+    {
+      "subcategory": "Bibi Zainab",
+      "title": "Ya Bibi ",
+      "description": "Zainab",
+      "imagePath": "Images/82658d66b4d5c40fede23e2abe0e3283.jpg",
+      "filePaths": [
+        "Files/hacker bg.jpg",
+        "Files/hacker bg.jpg"
+      ]
+    }
   ]
 }
