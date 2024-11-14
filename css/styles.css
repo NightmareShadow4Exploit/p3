@@ -1,0 +1,140 @@
+/* Reset Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #007f5f, #00b377); /* Gradient Background */
+  padding: 15px 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.logo img {
+  height: 50px;
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.logo img:hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 15px;
+  transition: color 0.3s ease, transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-links a:hover {
+  color: #e9ffec;
+  transform: translateY(-2px);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: #fff;
+  transition: width 0.4s ease, left 0.4s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.nav-links a.active {
+  color: #fffae6;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 5px 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.search-bar:hover {
+  transform: scale(1.05);
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  padding: 8px;
+  font-size: 16px;
+  width: 200px;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.search-bar input::placeholder {
+  color: #aaa;
+}
+
+.search-bar button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #007f5f;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.3s ease;
+}
+
+.search-bar button:hover {
+  color: #005f47;
+  transform: rotate(15deg) scale(1.2);
+}
+  

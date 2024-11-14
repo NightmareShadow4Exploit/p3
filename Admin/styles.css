@@ -1,0 +1,86 @@
+/* Global reset and body styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Styling for navigation buttons */
+.nav-buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.nav-buttons button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-buttons button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+
+.nav-buttons button:active {
+    transform: translateY(1px);
+}
+
+/* Section container and styling */
+.section-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.section {
+    display: none; /* Hide all sections initially */
+    width: 90%;
+    max-width: 1200px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    transform: translateY(20px);
+}
+
+.section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .nav-buttons button {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+
+    .section-container {
+        margin-top: 40px;
+    }
+
+    .section {
+        width: 95%;
+        padding: 20px;
+    }
+}
