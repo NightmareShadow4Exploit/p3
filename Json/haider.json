@@ -1,5 +1,17 @@
 {
   "dropdowns": [
     "imam ali"
+  ],
+  "metadata": [
+    {
+      "subcategory": "imam ali",
+      "title": "Imam ali",
+      "description": "Imam ali is the best imam\n\nno one can be like of him\n\nnor one can be like of him\n\nits a lot difference in these two lines",
+      "imagePath": "Images/img11.jpg",
+      "filePaths": [
+        "Files/img11.jpg",
+        "Files/img18.jpg"
+      ]
+    }
   ]
 }
