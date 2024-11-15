@@ -9,6 +9,16 @@
         "Files/img6.jpg",
         "Files/img6.jpg"
       ]
+    },
+    {
+      "subcategory": "Imam Ali",
+      "title": "Haider2",
+      "description": "Haider 2",
+      "imagePath": "Images/img4.jpg",
+      "filePaths": [
+        "Files/img5.jpg",
+        "Files/img5.jpg"
+      ]
     }
   ],
   "dropdowns": [
