@@ -19,6 +19,16 @@
         "Files/img5.jpg",
         "Files/img5.jpg"
       ]
+    },
+    {
+      "subcategory": "Imam hasan",
+      "title": "Imam Hasan",
+      "description": "Imam Hasan is our 2nd Imam\n\nhe is Al-Karim",
+      "imagePath": "Images/img3.jpg",
+      "filePaths": [
+        "Files/img2.jpg",
+        "Files/img2.jpg"
+      ]
     }
   ],
   "dropdowns": [
