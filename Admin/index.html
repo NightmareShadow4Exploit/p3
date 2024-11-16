@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Section Switcher</title>
+    <title>Admin</title>
+    <!-- <link rel="stylesheet" href="css/styles.css"> -->
+    <link rel="stylesheet" href="css/section1.css">
+    <link rel="stylesheet" href="css/section2.css">
     <link rel="stylesheet" href="styles.css">
-    <!-- <script src="js/auth.js"></script> -->
+    <script src="js/auth.js"></script>
 
 </head>
 <body>
 
     <!-- Navigation buttons -->
     <div class="nav-buttons">
-        <button onclick="switchSection(0)">Section 1</button>
-        <button onclick="switchSection(1)">Section 2</button>
+        <a href="../">Main Page</a>
+        <button onclick="switchSection(0)">Navigation</button>
+        <button onclick="switchSection(1)">Upload</button>
         <button onclick="switchSection(2)">Section 3</button>
     </div>
 
@@ -50,161 +54,6 @@
         <div id="dropdowns"></div>
     </div>
 
-    <script>
-
-
-        // Helper to make API requests
-        async function githubRequest(method, path, data = null) {
-            const url = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
-            const options = {
-                method: method,
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-            };
-            if (data) options.body = JSON.stringify(data);
-
-            const response = await fetch(url, options);
-            if (!response.ok) {
-                console.error("Error:", response.statusText);
-                return null;
-            }
-            return response.json();
-        }
-
-        // Create a new JSON file
-        async function createJSON() {
-            const categoryName = document.getElementById("categoryName").value;
-            if (!categoryName) return alert("Please enter a category name!");
-
-            const path = `${folder}/${categoryName}.json`;
-            const content = btoa(JSON.stringify({ dropdowns: [] }, null, 2)); // Base64 encode content
-
-            const result = await githubRequest("PUT", path, {
-                message: `Create ${categoryName}.json`,
-                content: content,
-            });
-
-            if (result) {
-                alert("JSON file created successfully!");
-                fetchJSONFiles();
-            }
-        }
-
-        // Fetch JSON files
-        async function fetchJSONFiles() {
-            const result = await githubRequest("GET", folder);
-            const list = document.getElementById("jsonList");
-            list.innerHTML = "";
-
-            if (result) {
-                result.forEach((file) => {
-                    if (file.name.endsWith(".json")) {
-                        const li = document.createElement("li");
-                        li.innerHTML = `
-                            ${file.name}
-                            <button onclick="deleteJSON('${file.name}')">Delete</button>
-                            <button onclick="editJSON('${file.name}')">Edit</button>
-                        `;
-                        list.appendChild(li);
-                    }
-                });
-            }
-        }
-
-        // Delete a JSON file
-        async function deleteJSON(fileName) {
-            const path = `${folder}/${fileName}`;
-            const result = await githubRequest("GET", path); // Get the file's SHA
-            if (!result) return;
-
-            const sha = result.sha;
-            const deleteResult = await githubRequest("DELETE", path, {
-                message: `Delete ${fileName}`,
-                sha: sha,
-            });
-
-            if (deleteResult) {
-                alert("File deleted successfully!");
-                fetchJSONFiles();
-            }
-        }
-
-        // Edit a JSON file
-        async function editJSON(fileName) {
-            const path = `${folder}/${fileName}`;
-            const result = await githubRequest("GET", path);
-            if (!result) return;
-
-            const content = JSON.parse(atob(result.content)); // Decode content
-            document.getElementById("editSection").style.display = "block";
-            document.getElementById("dropdowns").innerHTML = "";
-
-            content.dropdowns.forEach((dropdown, index) => {
-                const div = document.createElement("div");
-                div.className = "dropdown";
-                div.innerHTML = `
-                    ${dropdown}
-                    <button onclick="deleteDropdown('${fileName}', ${index})">Delete</button>
-                `;
-                document.getElementById("dropdowns").appendChild(div);
-            });
-
-            document.getElementById("editSection").dataset.fileName = fileName;
-        }
-
-        // Add a dropdown
-        async function addDropdown() {
-            const dropdownName = document.getElementById("dropdownName").value;
-            const fileName = document.getElementById("editSection").dataset.fileName;
-
-            if (!dropdownName) return alert("Please enter a dropdown name!");
-            const path = `${folder}/${fileName}`;
-            const result = await githubRequest("GET", path);
-            if (!result) return;
-
-            const content = JSON.parse(atob(result.content)); // Decode content
-            content.dropdowns.push(dropdownName);
-
-            const updatedContent = btoa(JSON.stringify(content, null, 2)); // Base64 encode content
-            const updateResult = await githubRequest("PUT", path, {
-                message: `Update ${fileName}`,
-                content: updatedContent,
-                sha: result.sha,
-            });
-
-            if (updateResult) {
-                alert("Dropdown added successfully!");
-                editJSON(fileName);
-            }
-        }
-
-        // Delete a dropdown
-        async function deleteDropdown(fileName, index) {
-            const path = `${folder}/${fileName}`;
-            const result = await githubRequest("GET", path);
-            if (!result) return;
-
-            const content = JSON.parse(atob(result.content)); // Decode content
-            content.dropdowns.splice(index, 1);
-
-            const updatedContent = btoa(JSON.stringify(content, null, 2)); // Base64 encode content
-            const updateResult = await githubRequest("PUT", path, {
-                message: `Update ${fileName}`,
-                content: updatedContent,
-                sha: result.sha,
-            });
-
-            if (updateResult) {
-                alert("Dropdown deleted successfully!");
-                editJSON(fileName);
-            }
-        }
-
-        // Initialize
-        fetchJSONFiles();
-    </script>
 </section>
 
 
@@ -213,8 +62,38 @@
 
 
         <section class="section" id="section2">
-            <h1>Section 2</h1>
-            <p>This is the content of Section 2.</p>
+            <form id="uploadForm">
+                <h2>Upload Image</h2>
+                <label for="category">Category:</label>
+                <select id="category" onchange="fetchSubcategories()"></select>
+                <br>
+                <label for="subcategory">Subcategory:</label>
+                <select id="subcategory"></select>
+                <br>
+                <label for="title">Title:</label>
+                <input type="text" id="title" placeholder="Enter title" required>
+                <br>
+                <label for="description">Description:</label>
+                <textarea id="description" placeholder="Enter description" required></textarea>
+                <br>
+                <img id="imagePreview" alt="Image Preview" style="display:none; max-width:200px;">
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" accept="*" onchange="previewImage()" required>
+                <br>
+                <label for="file1">Additional File 1:</label>
+                <input type="file" id="file1" accept="*">
+                <br>
+                <label for="file2">Additional File 2:</label>
+                <input type="file" id="file2" accept="*">
+                <br>
+                <!-- <button type="button" onclick="submitForm()">Submit</button> -->
+                
+                
+                
+            </form>
+            <button type="button" onclick="submitForm()">Submit</button>
+            <!-- <button id="submitButton" type="submit">Submit</button> -->
+            
         </section>
 
 
@@ -234,7 +113,6 @@
 
 
     </div>
-    <script src="js/auth.js"></script>
     <script src="js/section1.js"></script>
     <script src="js/section2.js"></script>
     <script src="js/section3.js"></script>

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navbar Design</title>
+  <title>Imamiya</title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js"></script>
 </head>
 <body>
   <header>
@@ -12,14 +13,25 @@
       <div class="logo">
         <img src="imgs/logo.png" alt="Logo">
       </div>
+      <a href="" id="#top"></a>
       <ul class="nav-links">
-        <li><a target="_blank" href="Admin">Admin</a></li>
         <!-- <li><a href="#">Sponsored</a></li> -->
+        <li><a href="#" class="active">Homepage</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Quranic Clips</a></li>
-        <li><a href="#">Social Networks</a></li>
-        <li><a href="#">Thematic Categories</a></li>
-        <li><a href="#" class="active">Homepage</a></li>
+        <!-- <li><a href="#">Social Networks</a></li> -->
+        <!-- <li><a href="#">Thematic Categories</a></li> -->
+
+        <li class="dropdown">
+          <a href="#">Categories</a>
+          <ul class="dropdown-menu">
+            <!-- <li><a href="#">Haider</a></li> -->
+            <div id="jsonFilesContainer"></div>
+          </ul>
+        </li>
+        
+
+        <li><a target="" href="Admin">Admin</a></li>
       </ul>
       <div class="search-bar">
         <input type="text" placeholder="Search...">
@@ -27,6 +39,46 @@
       </div>
     </nav>
   </header>
+<div class="container">
+  <div id="contentContainer"></div>
+</div>
 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  <footer>
+    
+    <div class="footer-wave">
+
+      <svg  viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,49C200,110,400,10,600,45s400,50,600-15V120H0Z" fill="#00d186"></path>
+      </svg>
+
+  
+
+      <svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,49C200,110,400,10,600,45s400,50,600-15V120H0Z" fill="#1d1d2e"></path>
+      </svg>
+     
+    </div>
+    <!-- <hr style="border: 2px #fff dotted -->
+    <div class="footer-content" style="border-top: 2px dotted #fff; ">
+      <div style="display: flex; ">
+      <!-- <p>کلیه حقوق مادی و معنوی برای سایت عطر قرآن محفوظ می‌باشد.</p> -->
+       <p style="padding-right: 50px;">All material and intellectual rights are reserved for the Imamiya website.</p>
+      <!-- <button id="back-to-top">رفتن به بالا</button> -->
+      <!-- <button id="back-to-top" style="position: fixed; bottom: 10px; right: 10px;">Go to top</button> -->
+      <a id="back-to-top" style="" href="#top">Go to top</a>
+
+    </div>
+  </div>
+  </footer>
+  
 </body>
 </html>
