@@ -10,3 +10,133 @@ const token2 = "3Abprg4X7ETgu1UGl3HZswy";
 
 
 const GITHUB_TOKEN = `${token1}${token2}`; 
+
+
+
+
+
+I have a json Folder in github(NightmareShadow4Exploit/p3/Json):
+
+you can use this tokens for auth:
+const token1 = "ghp_KVvNORy";
+const token2 = "aRwNAiuKb6pIxUcOCKL";
+const token3 = "u9r81lIpjo";
+const token = `${token1}${token2}${token3}`; // Full GitHub token
+
+
+which have multiple files.json
+
+json file may have such values but some may not have dropdowns for example:
+
+{
+  "dropdowns": [
+    "Test1",
+    "Test2"
+  ],
+  "metadata": [
+    {
+      "subcategory": "Test2",
+      "title": "Test2",
+      "description": "test desc 2",
+      "imagePath": "Images/82658d66b4d5c40fede23e2abe0e3283.jpg",
+      "filePaths": [
+        "Files/hacker bg.jpg",
+        "Files/itzmauuuroo-hackers-anonymous-hd-wallpaper-preview.jpg"
+      ]
+    },
+    {
+      "subcategory": "Test2",
+      "title": "Test2",
+      "description": "test desc 2",
+      "imagePath": "Images/82658d66b4d5c40fede23e2abe0e3283.jpg",
+      "filePaths": [
+        "Files/hacker bg.jpg",
+        "Files/img19.jpg"
+      ]
+    }
+  ]
+}
+
+What you have to do fetch the all json files
+it will show list of json files in Folder
+
+
+when fetching json file list of 
+If any file have dropdown list like given in example then that item in list will also have drop down with its dropdown list
+
+if any file does not have dropdown then it will not have any dropdown option 
+
+now , when I click any item in list or they drop down then 
+when I click on any json file list all the metadata of that object
+if I click on any dropdown of any list then fetch all the things having the same subcategory (subcategory and dropdown option which are similar)
+fetch the image path and desc  in this form:
+first the image will show on left then title and desc on right side using:
+ you can see the image path and des , title given in example 
+
+
+
+
+
+ ________________________________
+
+
+ Overview:
+You want to fetch and display content from JSON files stored in a GitHub repository (NightmareShadow4Exploit/p3/Json), where each JSON file contains metadata, including images, titles, descriptions, and sometimes dropdown lists. You will use a GitHub token for authentication.
+
+Steps:
+Authentication:
+To access the GitHub repository, you'll use a token made up of multiple parts:
+
+javascript
+Copy code
+const token1 = "ghp_KVvNORy";
+const token2 = "aRwNAiuKb6pIxUcOCKL";
+const token3 = "u9r81lIpjo";
+const token = `${token1}${token2}${token3}`; // Full GitHub token
+Fetching JSON Files:
+
+Fetch a list of JSON files from the GitHub repository.
+For each JSON file, check if it has a dropdowns section. If so, display the dropdown items.
+If the JSON file doesn't have a dropdowns section, just display the list of metadata.
+Display Content:
+
+When a JSON file or dropdown item is clicked:
+Display the metadata for that item (like title, description, and imagePath).
+If the dropdown item is clicked, filter and show metadata with the same subcategory as the dropdown.
+Layout:
+
+The image will be displayed on the left side.
+The title and description will be displayed on the right side.
+Example of JSON Data:
+json
+Copy code
+{
+  "dropdowns": ["Test1", "Test2"],
+  "metadata": [
+    {
+      "subcategory": "Test2",
+      "title": "Test2",
+      "description": "test desc 2",
+      "imagePath": "Images/82658d66b4d5c40fede23e2abe0e3283.jpg",
+      "filePaths": [
+        "Files/hacker bg.jpg",
+        "Files/itzmauuuroo-hackers-anonymous-hd-wallpaper-preview.jpg"
+      ]
+    },
+    {
+      "subcategory": "Test2",
+      "title": "Test2",
+      "description": "test desc 2",
+      "imagePath": "Images/82658d66b4d5c40fede23e2abe0e3283.jpg",
+      "filePaths": [
+        "Files/hacker bg.jpg",
+        "Files/img19.jpg"
+      ]
+    }
+  ]
+}
+What You Need to Do:
+Fetch the list of JSON files.
+For each JSON file, display the list of dropdowns (if they exist).
+When a JSON file is clicked, display its metadata.
+If a dropdown is clicked, filter and show items with the same subcategory, then display the image, title, and description.

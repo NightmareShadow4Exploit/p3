@@ -22,7 +22,7 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   background: linear-gradient(90deg, #007f5f, #00b377); /* Gradient Background */
   padding: 15px 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -362,7 +362,6 @@ select {
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 100;
   /* transform: translateY(100px); */
   transform: translateX(110px) translateY(-30px);
 
@@ -525,3 +524,139 @@ select {
   z-index: 999;
 }
 
+
+/* Media Queries for Responsive Design */
+
+/* General mobile adjustments */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 15px;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin: 10px 0;
+    justify-content: center;
+  }
+
+  .search-bar input {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Adjustments for tablets */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+  }
+}
+
+/* Footer responsiveness */
+@media (max-width: 768px) {
+  footer {
+    font-size: 12px;
+    /* padding: 10px; */
+  }
+
+  #back-to-top {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Adjustments for small screens (mobile-first) */
+@media (max-width: 480px) {
+  .metadata-item img {
+    width: 100px;
+    height: 100px;
+  }
+
+  #detailsContainer img {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  #detailsContainer .details-header h4 {
+    font-size: 18px;
+  }
+
+  #detailsContainer .details-info p {
+    font-size: 14px;
+  }
+
+  .footer-content {
+    font-size: 12px;
+    padding: 5px;
+  }
+}
+
+
+
+/* Default state: Show menu and hide toggle button */
+.menu-toggle {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: linear-gradient(90deg, #007f5f, #00b377);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    /* z-index: 1000; */
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
