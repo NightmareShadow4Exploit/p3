@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Imamiya</title>
   <link rel="stylesheet" href="css/styles.css">
-  <script src="js/main.js"></script>
+  <link rel="stylesheet" href="css/postImg.css">
+  <link rel="stylesheet" href="css/indexMiddle.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
   <header>
@@ -20,8 +24,8 @@
       left: 10px;
       z-index: 100;" aria-label="Toggle menu">&#9776;</button>
       <ul class="nav-links">
-        <li><a href="#" class="active">Homepage</a></li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="/" class="active">Home</a></li>
+        <!-- <li><a href="#">About Us</a></li> -->
         <li><a href="#">Quranic Clips</a></li>
         <li class="dropdown">
           <a href="#">Categories</a>
@@ -38,16 +42,59 @@
     </nav>
     
   </header>
+
+
+<div class="main">
+<div class="postImage">
+<img id="repo-image" alt="Loading image..." />
+</div>
+
+<div id="hadith-container"></div>
+</div>
 <div class="container">
+
+  <h4></h4>
   <div id="contentContainer"></div>
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
 <br>
 <br>
 <br>
 <br>
 <br>
+
+
+<!-- ///// indexMiddle.css ////// -->
+<!-- <div class="main-container">
+  Single Image
+  <div class="main-image">
+  <img src="imgs/فاتح-خیبر-استوری.jpg" alt="">
+  </div>
+
+  Grid of Images
+  <div class="grid-container">
+  <a href="https://duas.org/">  <div class="grid-item"><img src="imgs/links/duas.webp" alt=""></div></a>
+  <a href=""> <div class="grid-item">IMG</div></a>
+  <a href="">  <div class="grid-item">IMG</div></a>
+  <a href="">  <div class="grid-item">IMG</div></a>
+  <a href="">  <div class="grid-item">IMG</div></a>
+  <a href="">   <div class="grid-item">IMG</div></a>
+  </div>
+</div> -->
+
+
 <br>
 <br>
 
@@ -78,7 +125,23 @@
     </div>
   </div>
   </footer>
-  
+  <script src="js/main.js"></script>
+  <script src="js/PostImg.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/hadith.js"></script>
+  <script>
+    // Add file click event listener to redirect to files.html with the selected file's name
+fileElement.addEventListener('click', () => {
+    window.location.href = `files.html?file=${file.name}`;
+});
+
+// Add dropdown click event listener to redirect to files.html with the subcategory
+listItem.addEventListener('click', event => {
+    event.stopPropagation(); // Prevent file click event
+    window.location.href = `files.html?subcategory=${encodeURIComponent(option)}`;
+});
+
+  </script>
+
 </body>
 </html>

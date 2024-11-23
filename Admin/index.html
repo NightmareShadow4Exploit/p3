@@ -7,6 +7,7 @@
     <!-- <link rel="stylesheet" href="css/styles.css"> -->
     <link rel="stylesheet" href="css/section1.css">
     <link rel="stylesheet" href="css/section2.css">
+    <link rel="stylesheet" href="css/section3.css">
     <link rel="stylesheet" href="styles.css">
     <script src="js/auth.js"></script>
 
@@ -16,9 +17,9 @@
     <!-- Navigation buttons -->
     <div class="nav-buttons">
         <a href="../">Main Page</a>
-        <button onclick="switchSection(0)">Navigation</button>
+        <button onclick="switchSection(0)">Main</button>
         <button onclick="switchSection(1)">Upload</button>
-        <button onclick="switchSection(2)">Section 3</button>
+        <button onclick="switchSection(2)">Navigation</button>
     </div>
 
     <!-- Sections -->
@@ -37,31 +38,55 @@
  -->
 
 
-
  
+
+
+
  <section class="section" id="section1">
-    <h1>Manage JSON Files on GitHub</h1>
-    <input type="text" id="categoryName" placeholder="Enter category name" />
-    <button onclick="createJSON()">Create JSON</button>
+    <h1>Upload Image to GitHub</h1>
+  <input type="file" id="imageInput" accept="image/*" />
+  <button id="uploadButton">Upload</button>
 
-    <h2>Existing JSON Files</h2>
-    <ul id="jsonList"></ul>
 
-    <div id="editSection" style="display:none;">
-        <h3>Edit JSON</h3>
-        <input type="text" id="dropdownName" placeholder="Enter dropdown name" />
-        <button onclick="addDropdown()">Add Dropdown</button>
-        <div id="dropdowns"></div>
-    </div>
+  <br>
+  <br>
+  <br>
 
+  <input type="checkbox" id="customButton" name="customButton"> Custom Button
+  <br>
+  <button onclick="updateFile()">Update File</button>
+  
+  <br>
+  <br>
+  <br>
+ 
+
+  <h1>Upload Hadith</h1>
+  <form id="hadithForm">
+      <label for="title">Title:</label><br>
+      <input type="text" id="title" name="title" required><br><br>
+
+      <label for="hadith">Hadith:</label><br>
+      <textarea id="hadith" name="hadith" required></textarea><br><br>
+
+      <label for="reference">Reference:</label><br>
+      <input type="text" id="reference" name="reference" required><br><br>
+
+      <button type="button" id="addButton">Add</button>
+      <button type="button" id="mainButton">Main</button>
+  </form>
 </section>
 
 
+
+ 
 
 
 
 
         <section class="section" id="section2">
+
+            <div class="flex" style="display: flex;">
             <form id="uploadForm">
                 <h2>Upload Image</h2>
                 <label for="category">Category:</label>
@@ -76,7 +101,7 @@
                 <label for="description">Description:</label>
                 <textarea id="description" placeholder="Enter description" required></textarea>
                 <br>
-                <img id="imagePreview" alt="Image Preview" style="display:none; max-width:200px;">
+                <!-- <img id="imagePreview" alt="Image Preview" style="display:none; max-width:200px;"> -->
                 <label for="image">Upload Image:</label>
                 <input type="file" id="image" accept="*" onchange="previewImage()" required>
                 <br>
@@ -91,9 +116,16 @@
                 
                 
             </form>
+            
+            <div class="" style="margin-left: 100px;">
+                <br><br><br>
+                <br><br><br>
+                <img id="imagePreview" alt="Image Preview" style="display:none; max-width:200px;">
+                
+            </div>
+        </div>
             <button type="button" onclick="submitForm()">Submit</button>
             <!-- <button id="submitButton" type="submit">Submit</button> -->
-            
         </section>
 
 
@@ -102,13 +134,23 @@
 
 
 
+        
+ <section class="section" id="section3">
+    <h1>Add Categories</h1>
+    <input type="text" id="categoryName" placeholder="Enter category name" />
+    <button onclick="createJSON()">Create JSON</button>
 
-        <section class="section" id="section3">
-            <h1>Section 3</h1>
-            <p>This is the content of Section 3.</p>
-        </section>
+    <h2>Existing Categories</h2>
+    <ul id="jsonList"></ul>
 
+    <div id="editSection" style="display:none;">
+        <h3>Edit Category</h3>
+        <input type="text" id="dropdownName" placeholder="Enter dropdown name" />
+        <button onclick="addDropdown()">Add Dropdown</button>
+        <div id="dropdowns"></div>
+    </div>
 
+</section>
 
 
 

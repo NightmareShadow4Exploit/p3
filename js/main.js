@@ -30,31 +30,41 @@ async function displayJsonFiles() {
         const fileElement = document.createElement("div");
         fileElement.classList.add("json-file");
 
-        const title = document.createElement("h3");
+        const title = document.createElement("p");
         title.innerText = file.name;
         fileElement.appendChild(title);
 
-        // Add file element to container
-        container.appendChild(fileElement);
+        // Redirect to files.html with the selected file's name when the file is clicked
+        fileElement.addEventListener('click', () => {
+            // The file name is passed to the URL query string
+            window.location.href = `files.html?file=${encodeURIComponent(file.name)}`;
+        });
 
-        // Fetch the JSON file to display specific dropdowns
+        // Fetch JSON data to create dropdowns
         fetch(file.download_url)
             .then(response => response.json())
             .then(jsonData => {
                 if (jsonData.dropdowns) {
-                    // Create dropdown container that will be shown on hover
                     const dropdownContainer = document.createElement("div");
                     dropdownContainer.classList.add("dropdown-container");
 
                     const dropdownList = document.createElement("ul");
                     dropdownList.classList.add("dropdown-list");
 
+                    // Create dropdown list items
                     jsonData.dropdowns.forEach(option => {
                         const listItem = document.createElement("li");
                         listItem.innerText = option;
 
-                        listItem.addEventListener('click', () => {
-                            filterBySubcategory(option, jsonData.metadata);
+                        // Redirect to files.html with both file name and subcategory (option) when option is clicked
+                        listItem.addEventListener('click', event => {
+                            event.stopPropagation();  // Prevent file click event
+                            
+                            const fileName = encodeURIComponent(file.name);  // Ensure fileName is correctly encoded
+                            const subcategory = encodeURIComponent(option);  // Ensure subcategory (option) is correctly encoded
+
+                            // Redirect to files.html with file name and subcategory as query params
+                            window.location.href = `files.html?file=${fileName}&subcategory=${subcategory}`;
                         });
 
                         dropdownList.appendChild(listItem);
@@ -64,8 +74,13 @@ async function displayJsonFiles() {
                     fileElement.appendChild(dropdownContainer);
                 }
             });
+
+        // Add file element to container
+        container.appendChild(fileElement);
     });
 }
+
+// Initialize by displaying the JSON files
 
 // Filter metadata based on the selected subcategory
 function filterBySubcategory(subcategory, metadata) {
@@ -122,13 +137,13 @@ function displaySpecificData(item) {
     const detailedView = document.createElement("div");
     detailedView.classList.add("detailed-view");
     
-        const title = document.createElement("h4");
-        title.innerText = item.title;
-        detailedView.appendChild(title);
+    const title = document.createElement("h4");
+    title.innerText = item.title;
+    detailedView.appendChild(title);
     
-        const timestamp = document.createElement("p");
-        timestamp.innerText = `Timestamp: ${item.timestamp}`;
-        detailedView.appendChild(timestamp);
+    const timestamp = document.createElement("p");
+    timestamp.innerText = `Timestamp: ${item.timestamp}`;
+    detailedView.appendChild(timestamp);
 
     // Add image, title, timestamp, description, and file paths to detailed view
     const imageUrl = `${imageBaseUrl}${item.imagePath}`;

@@ -5,6 +5,7 @@ const token3 = "u9r81lIpjo";
 const token = `${token1}${token2}${token3}`; // Full GitHub token
 
 
+// Variables
 const username = "NightmareShadow4Exploit"; // Replace with your GitHub username
 const repo = "p3"; // Replace with your repository name
 const folder = "Json";

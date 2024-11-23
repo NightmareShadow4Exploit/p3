@@ -2,20 +2,41 @@
   margin: auto;
   height: auto;
   width: 90%;
+  padding: 20px;
+  /* background-color: #fff; Background for contrast */
+  
+  /* Border setup */
+  /* border: 20px solid transparent; */
+  /* border-image-source:  */
+    /* radial-gradient(circle, #006d77, #83c5be, #edf6f9); Gradient for base color */
+  /* border-image-slice: 1; */
+
+  /* Adding intricate Islamic geometric pattern */
+  /* position: relative; */
+  /* border-radius: 20px; Rounded corners for a soft finish */
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); Light shadow for depth */
 }
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="islamic-border" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M0,0 L0,25 L25,25 L25,0 Z" fill="none" stroke="%23006d77" stroke-width="2"/><circle cx="12.5" cy="12.5" r="5" fill="%2383c5be"/></pattern></defs><rect width="100%" height="100%" fill="url(%23islamic-border)"/></svg>') no-repeat center/cover; */
+  border-radius: 20px;
+  pointer-events: none;
+}
+
 
 /* Reset Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: 'Roboto', Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.6;
+  /* font-family: 'Roboto', Arial, sans-serif; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Navbar Styles */
@@ -23,15 +44,16 @@ body {
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
-  background: linear-gradient(90deg, #007f5f, #00b377); /* Gradient Background */
+  /* background: linear-gradient(90deg, #007f5f, #00b377); */
+  background-color: #00b377;
   padding: 15px 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
-  animation: fadeIn 1s ease-in-out;
+  /* animation: fadeIn 1s ease-in-out; */
 }
-
+/* 
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -39,7 +61,7 @@ body {
   to {
     opacity: 1;
   }
-}
+} */
 
 .logo img {
   height: 50px;
@@ -95,10 +117,10 @@ body {
 
 .nav-links a.active {
   color: #fffae6;
-  background: rgba(255, 255, 255, 0.15);
+  /* background: rgba(255, 255, 255, 0.15); */
   padding: 10px 20px;
   border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3);
+  /* box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3); */
 }
 
 /* Search Bar */
@@ -222,7 +244,7 @@ footer {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #007f5f;
+  background-color: white;
   border-radius: 8px;
   padding: 10px 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -262,12 +284,12 @@ footer {
 }
 
 .json-file {
-  cursor: pointer;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  border-radius: 5px;
+  /* cursor: pointer; */
+  /* margin-bottom: 10px; */
+  /* padding: 10px; */
+  /* border: 1px solid #ddd; */
+  /* background-color: #f9f9f9; */
+  /* border-radius: 5px; */
 }
 
 .json-file h3 {
@@ -347,9 +369,10 @@ select {
   cursor: pointer;
   margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
+  /* border: 1px solid #ddd; */
+  /* background-color: #f9f9f9; */
   border-radius: 5px;
+  color: #1d1d2e;
   position: relative;
 }
 
@@ -363,7 +386,7 @@ select {
   border: 1px solid #ddd;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   /* transform: translateY(100px); */
-  transform: translateX(110px) translateY(-30px);
+  transform: translateX(90px) translateY(-30px);
 
 }
 
@@ -383,6 +406,7 @@ select {
 .dropdown-list li {
   padding: 8px 12px;
   cursor: pointer;
+  width: 150px;
 }
 
 .dropdown-list li:hover {

@@ -1,0 +1,105 @@
+.main {
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+    /* gap: 20px; */
+    /* width: 90%; */
+    /* margin: 0 auto; */
+}
+.postImage {
+    position: relative;
+    flex: 1 1 300px;
+    height: 100vh; /* This sets the height to 100% of the viewport height */
+    max-width: 31%; /* This ensures the image doesn't exceed 31% of the container width */
+    width: auto; /* This allows the image to scale proportionally */
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.postImage:hover {
+    transform: scale(1.001);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.postImage::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-color: rgba(255, 255, 255, 0.3); Pale color overlay */
+    transition: background-color 0.3s ease;
+    z-index: 1; /* Ensure it overlays above the image */
+}
+
+.postImage:hover::after {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.postImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.postImage:hover img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+#hadith-container {
+    flex: 1 1 300px;
+    /* max-width: 600px; */
+    /* background-color: #f4f4f4; */
+    /* border: 1px solid #ddd;
+    border-radius: 8px; */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* text-align: center; */
+    margin: 0 auto;
+}
+
+#hadith-container h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#hadith-container p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+#hadith-container p em {
+    font-style: italic;
+    color: #777;
+}
+
+#hadith-container p strong {
+    font-weight: bold;
+    color: #333;
+}
+
+#copy-button {
+    background-color: #007f5f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#copy-button:hover {
+    background-color: #005f47;
+    transform: scale(1.05);
+}

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+        }
+
+        #contentContainer {
+            display: flex;
+            flex-direction: column;
+            /* gap: 20px; */
+        }
+
+        .metadata-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            /* border: 1px solid #ddd; */
+            padding-left: 75px;
+            padding-bottom: 20px;
+            /* border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .metadata-item:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .metadata-item img {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .metadata-item img:hover {
+            transform: scale(1.05);
+            filter: brightness(90%);
+        }
+
+        .metadata-item h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .metadata-item h4:hover {
+            color: #007BFF;
+        }
+
+        .metadata-item p {
+            margin: 5px 0 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .metadata-item p:hover {
+            color: #444;
+        }
+
+        .detailed-view{
+            margin:30px;
+        }
+        .detailed-view img {
+            margin:20px 0;
+            border-radius: 8px;
+        }
+
+        .detailed-view a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .detailed-view a:hover {
+            text-decoration: underline;
+        }
+
+        .detailed-view h2 {
+            font-size: 50px;
+            color: #222;
+        }
+
+        .detailed-view p {
+            color: #555;
+        }
+
+        .detailed-view a {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body><header>
+    <nav class="navbar">
+      <div class="logo">
+        <!-- <img src="imgs/logo.png" alt="Logo"> -->
+      </div>
+      <a href="" id="#top"></a>
+      <button class="menu-toggle" style=" margin-top: 10px;
+      position: fixed;
+      top: 10px; 
+      left: 10px;
+      z-index: 100;" aria-label="Toggle menu">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="/" class="active">Home</a></li>
+        <!-- <li><a href="#">About Us</a></li> -->
+        <li><a href="#">Quranic Clips</a></li>
+        <li class="dropdown">
+          <a href="#">Categories</a>
+          <ul class="dropdown-menu">
+            <div id="jsonFilesContainer"></div>
+          </ul>
+        </li>
+        <li><a target="" href="Admin">Admin</a></li>
+      </ul>
+      <!-- <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>🔍</button>
+      </div> -->
+    </nav>
+    
+  </header>
+    <div id="contentContainer"></div>
+<script src="js/main.js"></script>
+    <script>
+        async function fetchMetadata(fileName) {
+            const token1 = "ghp_KVvNORy";
+            const token2 = "aRwNAiuKb6pIxUcOCKL";
+            const token3 = "u9r81lIpjo";
+            const token = `${token1}${token2}${token3}`; 
+            const repo = "NightmareShadow4Exploit/p3";
+            const folder = "Json";
+            const apiUrl = `https://api.github.com/repos/${repo}/contents/${folder}/${fileName}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `token ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch metadata');
+                }
+
+                const data = await response.json();
+
+                if (data.content) {
+                    const decodedContent = atob(data.content); // Decode Base64 content
+                    const jsonData = JSON.parse(decodedContent); // Parse the JSON data
+
+                    return jsonData.metadata; // Return the metadata array
+                }
+
+                return null;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }
+
+        async function handleMetadataFetching() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const fileName = urlParams.get('file');
+            const subcategory = urlParams.get('subcategory'); // Optional
+
+            console.log("Query Parameters:", { fileName, subcategory });
+
+            if (!fileName) {
+                alert('Missing file parameter in the URL.');
+                return;
+            }
+
+            const metadata = await fetchMetadata(fileName);
+
+            if (metadata) {
+                if (subcategory) {
+                    displayMetadata(metadata, subcategory); // Filter by subcategory
+                } else {
+                    displayAllMetadata(metadata); // Display all metadata
+                }
+            } else {
+                // alert("Failed to fetch metadata or no metadata found.");
+            }
+        }
+
+        function truncateText(text, maxLength) {
+            return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+        }
+
+        function displayMetadata(metadata, subcategory) {
+            const contentContainer = document.getElementById('contentContainer');
+            contentContainer.innerHTML = ''; // Clear previous content
+
+            const filteredItems = metadata.filter(item => item.subcategory === subcategory);
+
+            if (filteredItems.length === 0) {
+                contentContainer.innerHTML = '<p>No items found for the selected subcategory.</p>';
+                return;
+            }
+
+            filteredItems.forEach(item => createMetadataItem(item, contentContainer));
+        }
+
+        function displayAllMetadata(metadata) {
+            const contentContainer = document.getElementById('contentContainer');
+            contentContainer.innerHTML = ''; // Clear previous content
+
+            metadata.forEach(item => createMetadataItem(item, contentContainer));
+        }
+
+        function createMetadataItem(item, container) {
+            const itemElement = document.createElement("div");
+            itemElement.classList.add("metadata-item");
+
+            const image = document.createElement("img");
+            image.src = `https://raw.githubusercontent.com/NightmareShadow4Exploit/p3/main/${item.imagePath}`;
+            image.alt = item.title;
+
+            const textContainer = document.createElement("div");
+
+            const title = document.createElement("h4");
+            title.innerText = item.title;
+
+            const description = document.createElement("p");
+            description.innerText = truncateText(item.description, 63);
+
+            const clickHandler = () => {
+                showDetailedView(item);
+                const newUrl = `?file=${encodeURIComponent(item.fileName)}&title=${encodeURIComponent(item.title)}`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            };
+
+            image.addEventListener('click', clickHandler);
+            title.addEventListener('click', clickHandler);
+            description.addEventListener('click', clickHandler);
+
+            textContainer.appendChild(title);
+            
+            textContainer.appendChild(description);
+            itemElement.appendChild(image);
+            itemElement.appendChild(textContainer);
+
+            container.appendChild(itemElement);
+        }
+
+        function showDetailedView(item) {
+            const contentContainer = document.getElementById('contentContainer');
+            contentContainer.innerHTML = ''; // Clear previous content
+
+            const detailedView = document.createElement("div");
+            detailedView.classList.add("detailed-view");
+
+            const title = document.createElement("h2");
+            title.innerText = item.title;
+
+            const description = document.createElement("p");
+            description.innerText = item.description;
+
+            const image = document.createElement("img");
+            image.src = `https://raw.githubusercontent.com/NightmareShadow4Exploit/p3/main/${item.imagePath}`;
+            image.alt = item.title;
+            image.style.width = "400px";
+            image.style.height = "auto";
+            
+            const downloadTitle = document.createElement("h4");
+            downloadTitle.innerText = "Download Files:";
+            
+            detailedView.appendChild(title);
+            detailedView.appendChild(image);
+            detailedView.appendChild(description);
+            detailedView.appendChild(downloadTitle);
+
+            item.filePaths.forEach(filePath => {
+                const fileLink = document.createElement("a");
+                fileLink.href = `https://raw.githubusercontent.com/NightmareShadow4Exploit/p3/main/${filePath}`;
+                fileLink.download = filePath.split('/').pop();
+                fileLink.innerText = filePath.split('/').pop();
+               
+            detailedView.appendChild(fileLink);
+            detailedView.appendChild(document.createElement("br"));
+            });
+
+
+          
+
+            contentContainer.appendChild(detailedView);
+        }
+
+        handleMetadataFetching();
+    </script>
+</body>
+</html>
