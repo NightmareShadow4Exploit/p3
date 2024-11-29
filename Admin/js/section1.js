@@ -143,21 +143,21 @@ function encodeBase64(string) {
 
 // Handle "Add Hadith" button click
 document.getElementById("addButton").addEventListener("click", async () => {
-  const title = document.getElementById("title").value;
+  const title2 = document.getElementById("title2").value;
   const hadith = document.getElementById("hadith").value;
   const reference = document.getElementById("reference").value;
 
-  const newEntry = { title, hadith, reference };
+  const newEntry = { title2, hadith, reference };
   await updateFile("hadith.json", newEntry, false); // Append to hadith.json
 });
 
 // Handle "Update Main" button click
 document.getElementById("mainButton").addEventListener("click", async () => {
-  const title = document.getElementById("title").value;
+  const title2 = document.getElementById("title2").value;
   const hadith = document.getElementById("hadith").value;
   const reference = document.getElementById("reference").value;
 
-  const newEntry = { title, hadith, reference };
+  const newEntry = { title2, hadith, reference };
   await updateFile("main.json", newEntry, true); // Overwrite main.json
 });
 

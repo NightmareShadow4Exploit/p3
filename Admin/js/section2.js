@@ -48,7 +48,6 @@ async function fetchSubcategories() {
         });
     }
 }
-// Submit Form
 async function submitForm() {
     const category = document.getElementById("category").value;
     const subcategory = document.getElementById("subcategory").value;
@@ -58,7 +57,7 @@ async function submitForm() {
     const file1 = document.getElementById("file1").files[0];
     const file2 = document.getElementById("file2").files[0];
 
-    if (!category || !title || !description || !image) {  // !subcategory ||
+    if (!category || !title || !description || !image) {
         return alert("Please fill all required fields!");
     }
 
@@ -87,37 +86,67 @@ async function submitForm() {
     // Get current timestamp in Iran Standard Time
     const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Tehran" });
 
-    // Save metadata
+    // Metadata to add
+    const newMetadata = {
+        subcategory,
+        title,
+        description,
+        timestamp,
+        imagePath,
+        filePaths,
+    };
+
+   // Fetch and Update recent.json
+const recentPath = "recent.json";
+let recentContent = []; // Initialize an empty array for recent content
+
+// Fetch current content of recent.json
+let recentSha = null; // Store the SHA of recent.json
+const recentResult = await githubRequest("GET", recentPath);
+if (recentResult) {
+    recentContent = JSON.parse(atob(recentResult.content)); // Decode file content
+    recentSha = recentResult.sha; // Save the file's SHA
+}
+
+// Add the new metadata at the top of the array
+recentContent.unshift(newMetadata);
+
+// Ensure the array contains only the latest 4 items
+if (recentContent.length > 4) {
+    recentContent = recentContent.slice(0, 4); // Keep only the first 4 items
+}
+
+// Attempt to update recent.json with the latest content and correct SHA
+try {
+    await githubRequest("PUT", recentPath, {
+        message: "Update recent.json",
+        content: btoa(JSON.stringify(recentContent, null, 2)), // Encode updated content
+        sha: recentSha, // Include the SHA for update
+    });
+    console.log("recent.json updated successfully!");
+} catch (error) {
+    console.error("Failed to update recent.json:", error);
+    alert("Failed to update recent.json. Please try again.");
+}
+
+
+    // Update category file
     const metadataPath = `Json/${category}`;
     const result = await githubRequest("GET", metadataPath);
     if (result) {
         const content = JSON.parse(atob(result.content));
-
-        // Add new metadata as a separate property, ensuring dropdowns remain unchanged
         if (!content.metadata) {
             content.metadata = []; // Initialize metadata array if it doesn't exist
         }
-        content.metadata.push({
-            subcategory,
-            title,
-            description,
-            timestamp, // Add timestamp
-            imagePath,
-            filePaths, // Add file paths for file1 and file2
-        });
-
-        const updatedContent = btoa(JSON.stringify(content, null, 2));
+        content.metadata.push(newMetadata); // Add new metadata
         await githubRequest("PUT", metadataPath, {
             message: `Update ${category}`,
-            content: updatedContent,
+            content: btoa(JSON.stringify(content, null, 2)),
             sha: result.sha,
         });
-
         alert("Data submitted successfully!");
     }
 }
-
-
 
 // Initialize Categories
 fetchCategories();

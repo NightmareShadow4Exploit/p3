@@ -21,7 +21,6 @@ async function fetchJsonFiles() {
     const data = await response.json();
     return data.filter(file => file.name.endsWith(".json"));
 }
-
 async function displayJsonFiles() {
     const jsonFiles = await fetchJsonFiles();
     const container = document.getElementById("jsonFilesContainer");
@@ -30,13 +29,15 @@ async function displayJsonFiles() {
         const fileElement = document.createElement("div");
         fileElement.classList.add("json-file");
 
+        // Remove the file extension from the displayed name
+        const fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, "");
         const title = document.createElement("p");
-        title.innerText = file.name;
+        title.innerText = fileNameWithoutExtension;
         fileElement.appendChild(title);
 
         // Redirect to files.html with the selected file's name when the file is clicked
         fileElement.addEventListener('click', () => {
-            // The file name is passed to the URL query string
+            // Pass the full file name (with extension) to the URL
             window.location.href = `files.html?file=${encodeURIComponent(file.name)}`;
         });
 
@@ -58,12 +59,9 @@ async function displayJsonFiles() {
 
                         // Redirect to files.html with both file name and subcategory (option) when option is clicked
                         listItem.addEventListener('click', event => {
-                            event.stopPropagation();  // Prevent file click event
-                            
-                            const fileName = encodeURIComponent(file.name);  // Ensure fileName is correctly encoded
-                            const subcategory = encodeURIComponent(option);  // Ensure subcategory (option) is correctly encoded
-
-                            // Redirect to files.html with file name and subcategory as query params
+                            event.stopPropagation(); // Prevent file click event
+                            const fileName = encodeURIComponent(file.name);
+                            const subcategory = encodeURIComponent(option);
                             window.location.href = `files.html?file=${fileName}&subcategory=${subcategory}`;
                         });
 
@@ -75,7 +73,6 @@ async function displayJsonFiles() {
                 }
             });
 
-        // Add file element to container
         container.appendChild(fileElement);
     });
 }

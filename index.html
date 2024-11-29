@@ -7,10 +7,39 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/postImg.css">
   <link rel="stylesheet" href="css/indexMiddle.css">
+  <!-- <link rel="stylesheet" href="css/font.css"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazir&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shabnam&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tanha&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet"> -->
+  <script src="js/main.js"></script>
+  <link rel="stylesheet" href="css/recent.css">
+
+<style>
+  a{
+    text-decoration: none;
+    color: #333;
+  }
+  a:hover{
+    color: #ccc;
+  }
+  body{
+    /* font-family: 'Shabnam', 'Noto Sans Arabic', 'Amiri' ,'Vazir'; */
+    font-family: 'Noto Sans Arabic';
+    /* font-family: 'Amiri'; */
+    /* font-family: 'Vazir'; */
+    /* font-family: 'Tanha'; */
+
+  }
 
 
+
+</style>
 </head>
+  <script src="js/recent.js"></script>
+
 <body>
   <header>
     <nav class="navbar">
@@ -58,17 +87,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
 <br>
 <br>
 <br>
@@ -95,6 +113,11 @@
 </div> -->
 
 
+<!-- <h1 class="contenth1">Recent Files and Images</h1> -->
+ <div class="mainContentContainer">
+<div id="content"></div>
+<script src="recent.js"></script>
+</div>
 <br>
 <br>
 
@@ -125,10 +148,11 @@
     </div>
   </div>
   </footer>
-  <script src="js/main.js"></script>
+  <!-- <script src="js/recent.js"></script> -->
   <script src="js/PostImg.js"></script>
   <script src="js/script.js"></script>
   <script src="js/hadith.js"></script>
+
   <script>
     // Add file click event listener to redirect to files.html with the selected file's name
 fileElement.addEventListener('click', () => {
@@ -142,6 +166,8 @@ listItem.addEventListener('click', event => {
 });
 
   </script>
+<br><br><br>
+
 
 </body>
 </html>
